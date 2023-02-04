@@ -1,8 +1,9 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { TasksEntity } from "src/tasks/tasks.entity/tasks.entity";
+import { Column, Entity, PrimaryGeneratedColumn, OneToOne, ManyToOne } from "typeorm";
 
 
 
-@Entity('categories')
+@Entity('Categories')
 
 export class CategoriesEntity {
     @PrimaryGeneratedColumn('uuid')
@@ -14,6 +15,6 @@ export class CategoriesEntity {
     @Column()
     couleur: string;
 
-    //
-
+    @ManyToOne(type => TasksEntity, (Tasks) => Tasks.categories)
+    Tasks: TasksEntity[];
 }

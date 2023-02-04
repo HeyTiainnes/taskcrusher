@@ -1,8 +1,9 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { TasksEntity } from "src/tasks/tasks.entity/tasks.entity";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity('checkListItems')
 
-export class checkListItems {
+export class checkListItemsEntity {
     @PrimaryGeneratedColumn('uuid')
     id: number
 
@@ -15,7 +16,10 @@ export class checkListItems {
     @Column()
     notes: string;
 
-    //
+
+    @ManyToOne(type => TasksEntity, (tasks) => tasks.checkListItems)
+    //checkListItems: checkListItemsEntity[];
+    Tasks: TasksEntity[];
 
 }
 

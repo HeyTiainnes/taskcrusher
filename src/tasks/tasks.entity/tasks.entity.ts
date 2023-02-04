@@ -1,7 +1,10 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { CategoriesEntity } from "src/categories/categories.entity/categories.entity";
+import { checkListItemsEntity, } from "src/check-list-items/check-list-items.entity/check-list-items.entity";
+import { UsersEntity } from "src/users/users/users.entity/users.entity";
+import { Column, Entity, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 
 
-@Entity('tasks')
+@Entity('Tasks')
 
 export class TasksEntity {
 
@@ -28,6 +31,15 @@ export class TasksEntity {
 
     @Column()
     notes: string;
+
+    @OneToMany(type => checkListItemsEntity, (checkListItems) => checkListItems.Tasks)
+    checkListItems: checkListItemsEntity[];
+
+    @OneToOne(type => CategoriesEntity, (categorie) => categorie.Tasks)
+    categories: CategoriesEntity[];
+
+    @OneToOne(type => UsersEntity, (users) => users.Tasks)
+    user: UsersEntity;
 
 }
 //
