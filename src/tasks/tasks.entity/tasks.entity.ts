@@ -8,8 +8,8 @@ import { Column, Entity, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typ
 
 export class TasksEntity {
 
-    @PrimaryGeneratedColumn('uuid')
-    id_tasks: number;
+    @PrimaryGeneratedColumn()
+    id: number;
 
     @Column()
     designation?: string;

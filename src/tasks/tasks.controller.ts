@@ -1,8 +1,8 @@
-import { Controller, Get, Post, Delete, Put, Body } from '@nestjs/common';
+import { Controller, Get, Post, Delete, Put, Patch, Body, Param } from '@nestjs/common';
 import { CreateTasksDTO } from './tasks.entity/Dto/createTasks.dto';
 import { TasksEntity } from './tasks.entity/tasks.entity';
 import { TasksService } from './tasks.service';
-
+import { updateTaskeDto } from './tasks.entity/Dto/updateTask.dto'
 
 
 @Controller('tasks')
@@ -14,16 +14,18 @@ export class TasksController {
         return 'liste todo';
     }
     @Post()
-    async createTask(@Body() task: TasksEntity) {
-        console.log('new tsk', task);
-        return await this.tasksService.createTask(task);
+    async createTask(@Body() create: TasksEntity) {
+        console.log('new tsk', create);
+        return await this.tasksService.createTask(create);
     }
 
-    @Put()
-    PutTodo(): string {
-        console.log('modif todo');
-        return 'modif todo';
+    @Patch(':id')
+    UpdateTask(@Param('id') id: string, @Body() updateTaskeDto: updateTaskeDto) {
+        console.log('update', updateTaskeDto, 'id', +id)
+        return this.tasksService.update(+id, updateTaskeDto);
     }
+
+
     @Delete()
     deleteTodo(): string {
         console.log('suppr todo');
