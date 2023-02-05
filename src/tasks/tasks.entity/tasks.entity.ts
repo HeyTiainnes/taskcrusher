@@ -12,25 +12,25 @@ export class TasksEntity {
     id_tasks: number;
 
     @Column()
-    designation: string;
+    designation?: string;
 
-    @Column()
-    importance: number;
+    @Column({ nullable: true })
+    importance?: number;
 
-    @Column()
-    dead_line: Date;
+    @Column({ nullable: true })
+    dead_line?: Date;
 
-    @Column()
-    duree_prevue: Date;
+    @Column({ nullable: true })
+    duree_prevue?: Date;
 
-    @Column()
-    date_debut_prevue: Date;
+    @Column({ nullable: true })
+    date_debut_prevue?: Date;
 
-    @Column()
-    etat: boolean;
+    @Column({ nullable: true })
+    etat?: boolean;
 
-    @Column()
-    notes: string;
+    @Column({ nullable: true })
+    notes?: string;
 
     @OneToMany(type => checkListItemsEntity, (checkListItems) => checkListItems.Tasks)
     checkListItems: checkListItemsEntity[];
