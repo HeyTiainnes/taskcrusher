@@ -37,4 +37,26 @@ export class TasksService {
         taskUpdate.notes = updatTaskeDto.notes;
         return await this.tasksRepository.save(taskUpdate);
     }
+    // async findOne(id: number): Promise<TasksEntity> {
+    //     const taskfound = await this.tasksRepository.findOneBy({
+    //         id: id,
+    //     });
+
+    //     return await taskfound;
+    // }
+
+    async findAll(): Promise<TasksEntity[]> {
+        return await this.tasksRepository.find();
+    }
+
+    async remove(id: number): Promise<string> {
+        const Result = await this.tasksRepository.delete({ id });
+        if (Result.affected === 0) {
+            throw new NotFoundException(
+                `Suppression impossible, car il n'y a pas de tasl avec l'id ${id}`,
+            );
+        }
+        return `Bravo: L'utilisateur avec l'id ${id} a bien été supprimée...`;
+    }
+
 }
