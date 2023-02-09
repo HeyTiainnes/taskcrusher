@@ -26,7 +26,7 @@ export class TasksService {
         return taskFound;
     }
     async update(id: number, updatTaskeDto: updateTaskeDto) {
-        // 1/ recuperer la task a modifier dans la constante suivante. on parcours les task via find pour trouver task ac l'id recherché
+
         const taskUpdate = await this.findOne(id);
         taskUpdate.designation = updatTaskeDto.designation;
         taskUpdate.importance = updatTaskeDto.importance;
@@ -37,13 +37,6 @@ export class TasksService {
         taskUpdate.notes = updatTaskeDto.notes;
         return await this.tasksRepository.save(taskUpdate);
     }
-    // async findOne(id: number): Promise<TasksEntity> {
-    //     const taskfound = await this.tasksRepository.findOneBy({
-    //         id: id,
-    //     });
-
-    //     return await taskfound;
-    // }
 
     async findAll(): Promise<TasksEntity[]> {
         return await this.tasksRepository.find();

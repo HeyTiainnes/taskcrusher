@@ -30,9 +30,6 @@ export class UserService {
         }
         return userFound;
     }
-    // async findAll(): Promise<UsersEntity[]> {
-    //     return await this.userRepository.find();
-    // }
 
     async update(id_users: number, updateUserDto: createUser) {
         const userUpdate = await this.findOne(id_users);
