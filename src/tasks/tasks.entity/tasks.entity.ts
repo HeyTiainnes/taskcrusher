@@ -1,6 +1,6 @@
 import { CategoriesEntity } from "src/categories/categories.entity/categories.entity";
 import { checkListItemsEntity, } from "src/check-list-items/check-list-items.entity/check-list-items.entity";
-import { UsersEntity } from "src/users/users/users.entity/users.entity";
+import { UsersEntity } from "src/users/Dto/users.entity/users.entity";
 import { Column, Entity, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 
 

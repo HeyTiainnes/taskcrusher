@@ -8,12 +8,13 @@ import { TasksModule } from './tasks/tasks.module';
 import { ConfigModule } from '@nestjs/config'
 import { TypeOrmModule } from '@nestjs/typeorm';
 import * as dotenv from 'dotenv';
+import { UsersModule } from './users/users.module';
 
 dotenv.config();
 
 
 @Module({
-  imports: [TasksModule,
+  imports: [UsersModule, TasksModule,
     ConfigModule.forRoot({
       isGlobal: true
     }),

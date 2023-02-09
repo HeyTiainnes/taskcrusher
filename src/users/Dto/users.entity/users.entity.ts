@@ -3,9 +3,9 @@ import { Column, Entity, PrimaryGeneratedColumn, ManyToOne } from "typeorm";
 
 
 
-@Entity('users')
+@Entity('theyUsers')
 export class UsersEntity {
-    @PrimaryGeneratedColumn('uuid')
+    @PrimaryGeneratedColumn()
     id_users: number
 
     @Column()

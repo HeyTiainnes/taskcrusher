@@ -1,0 +1,9 @@
+export class getUser {
+
+
+    id_users: string;
+    name: string;
+    mail: string;
+    password: string;
+
+}
