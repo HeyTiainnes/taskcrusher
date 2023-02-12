@@ -6,7 +6,7 @@ import { Column, Entity, PrimaryGeneratedColumn, OneToOne, ManyToOne } from "typ
 @Entity('Categories')
 
 export class CategoriesEntity {
-    @PrimaryGeneratedColumn('uuid')
+    @PrimaryGeneratedColumn()
     id_categorie: number
 
     @Column()
