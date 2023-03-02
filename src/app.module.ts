@@ -14,6 +14,7 @@ import { CategoriesModule } from './categories/categories.module';
 //enplus
 import { CategoriesService } from './categories/categories.service';
 import { CheckListItemsModule } from './check-list-items/check-list-items.module';
+import { AuthModule } from './auth/auth.module';
 
 
 dotenv.config();
@@ -35,6 +36,7 @@ dotenv.config();
         entities: ["dist/**/*.entity{.ts,.js}"],
         synchronize: true,
       }),
+    AuthModule,
 
 
 
