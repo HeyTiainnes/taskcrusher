@@ -4,6 +4,9 @@ import * as bcrypt from 'bcrypt';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UsersEntity } from 'src/users/Dto/users.entity/users.entity';
 import { Repository } from 'typeorm';
+import { LoginDto } from './dto/login.dto';
+import { JwtService } from '@nestjs/jwt';
+import { UnauthorizedException } from '@nestjs/common/exceptions';
 
 // import { UpdateAuthDto } from './dto/update-auth.dto';
 
@@ -12,7 +15,8 @@ export class AuthService {
 
   constructor(
     @InjectRepository(UsersEntity)
-    private userRepository: Repository<UsersEntity>
+    private userRepository: Repository<UsersEntity>,
+    private jwtService: JwtService,
   ) { }
 
 
@@ -48,5 +52,22 @@ export class AuthService {
       }
     }
   }
+  async login(loginDto: LoginDto) {
+    const { name, password } = loginDto;
+    const user = await this.userRepository.findOneBy({ name });
+
+    if (user && (await bcrypt.compare(password, user.password))) {
+      const payload = { name };
+      const accesToken = await this.jwtService.sign(payload);
+
+      return { accesToken };
+    } else {
+      throw new UnauthorizedException(
+        'Ces identifiants ne sont pas bon...',
+      );
+    }
+
+  }
 
 }
+
