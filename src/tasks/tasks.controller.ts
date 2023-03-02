@@ -5,7 +5,7 @@ import { TasksService } from './tasks.service';
 import { updateTaskeDto } from './Dto/updateTask.dto'
 
 
-@Controller('tasks')
+@Controller('Tasks')
 export class TasksController {
     constructor(private readonly tasksService: TasksService) { }
     // @Get()
@@ -17,6 +17,7 @@ export class TasksController {
     async createTask(@Body() create: TasksEntity) {
         console.log('new tsk', create);
         return await this.tasksService.createTask(create);
+
     }
 
     @Patch(':id')
