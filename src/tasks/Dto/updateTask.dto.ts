@@ -1,5 +1,5 @@
 export class updateTaskeDto {
-    id: number;
+    // id: number;
     designation: string;
     importance: number;
     dead_line: Date;

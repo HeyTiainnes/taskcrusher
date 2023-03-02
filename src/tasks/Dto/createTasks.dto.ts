@@ -3,11 +3,12 @@
 export class CreateTasksDTO {
 
     designation: string;
-    importance: number;
+    // importance: number;
     dead_line: Date;
-    duree_prevue: Date;
-    date_debut_prevue: Date;
-    etat: boolean;
+    // duree_prevue: Date;
+    //date_debut_prevue: Date;
+    //etat: boolean;
     notes: string;
 
 }
+
