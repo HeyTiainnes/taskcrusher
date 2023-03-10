@@ -27,11 +27,11 @@ export class TasksController {
     }
 
 
-    @Delete()
-    deleteTodo(): string {
-        console.log('suppr todo');
-        return 'suppr todo';
-    }
+    // @Delete()
+    // deleteTodo(): string {
+    //     console.log('suppr todo');
+    //     return 'suppr todo';
+    // }
 
     @Get(':id')
     findOne(@Param('id') id: string) {

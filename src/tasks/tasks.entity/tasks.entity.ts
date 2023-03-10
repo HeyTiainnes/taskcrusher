@@ -1,7 +1,7 @@
 import { CategoriesEntity } from "src/categories/categories.entity/categories.entity";
 import { checkListItemsEntity, } from "src/check-list-items/check-list-items.entity/check-list-items.entity";
 import { UsersEntity } from "src/users/Dto/users.entity/users.entity";
-import { Column, Entity, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 
 
 @Entity('Tasks')
@@ -38,8 +38,6 @@ export class TasksEntity {
     @OneToOne(type => CategoriesEntity, (categorie) => categorie.Tasks)
     categories: CategoriesEntity[];
 
-    @OneToOne(type => UsersEntity, (users) => users.Tasks)
+    @ManyToOne(type => UsersEntity, (user) => user.tasks)
     user: UsersEntity;
-
 }
-//
