@@ -8,8 +8,6 @@ import { LoginDto } from './dto/login.dto';
 import { JwtService } from '@nestjs/jwt';
 import { UnauthorizedException } from '@nestjs/common/exceptions';
 
-// import { UpdateAuthDto } from './dto/update-auth.dto';
-
 @Injectable()
 export class AuthService {
 
