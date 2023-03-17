@@ -8,16 +8,11 @@ import { updateTaskeDto } from './Dto/updateTask.dto'
 @Controller('Tasks')
 export class TasksController {
     constructor(private readonly tasksService: TasksService) { }
-    // @Get()
-    // getHello(): string {
-    //     console.log('recuperer la liste des todo');
-    //     return 'liste todo';
-    // }
+
     @Post()
     async createTask(@Body() create: TasksEntity) {
         console.log('new tsk', create);
         return await this.tasksService.createTask(create);
-
     }
 
     @Patch(':id')
@@ -25,7 +20,6 @@ export class TasksController {
         console.log('update', updateTaskeDto, 'id', +id)
         return this.tasksService.update(+id, updateTaskeDto);
     }
-
 
     @Delete()
     deleteTodo(): string {
