@@ -17,8 +17,7 @@ export class UsersEntity {
     @Column()
     password: string;
 
-    // @ManyToOne(type => TasksEntity, (Tasks) => Tasks.user)
-    // Tasks: TasksEntity[];
+
     @OneToMany(type => TasksEntity, (task) => task.user)
     tasks: TasksEntity[];
 
