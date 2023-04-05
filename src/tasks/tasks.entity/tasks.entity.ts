@@ -38,7 +38,7 @@ export class TasksEntity {
     @OneToOne(type => CategoriesEntity, (categorie) => categorie.Tasks)
     categories: CategoriesEntity[];
 
-    @OneToOne(type => UsersEntity, (users) => users.Tasks)
+    @OneToOne(type => UsersEntity, (users) => users.tasks)
     user: UsersEntity;
 
 }
