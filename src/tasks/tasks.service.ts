@@ -38,12 +38,7 @@ export class TasksService {
         return await this.tasksRepository.save(taskUpdate);
     }
     // async findOne(id: number): Promise<TasksEntity> {
-    //     const taskfound = await this.tasksRepository.findOneBy({
-    //         id: id,
-    //     });
 
-    //     return await taskfound;
-    // }
 
     async findAll(): Promise<TasksEntity[]> {
         return await this.tasksRepository.find();
