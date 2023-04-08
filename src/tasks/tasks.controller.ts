@@ -1,8 +1,9 @@
-import { Controller, Get, Post, Delete, Put, Patch, Body, Param } from '@nestjs/common';
+import { Controller, Get, Post, Delete, Put, Patch, Body, Param, UseGuards } from '@nestjs/common';
 import { CreateTasksDTO } from './Dto/createTasks.dto';
 import { TasksEntity } from './tasks.entity/tasks.entity';
 import { TasksService } from './tasks.service';
 import { updateTaskeDto } from './Dto/updateTask.dto'
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
 
 @Controller('Tasks')
@@ -35,8 +36,9 @@ export class TasksController {
     }
 
     @Get()
-    findAll() {
-        return this.tasksService.findAll();
+    // @UseGuards(JwtAuthGuard)
+    async findAll() {
+        return await this.tasksService.findAll();
     }
 
     @Delete(':id')
