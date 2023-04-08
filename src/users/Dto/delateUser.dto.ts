@@ -1,6 +1,6 @@
 export class delateUser {
 
-    id_users: string;
+    id_users: number;
     name: string;
     mail: string;
     password: string;

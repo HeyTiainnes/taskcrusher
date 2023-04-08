@@ -9,11 +9,7 @@ import { createUser } from './Dto/createUser.dto';
 export class UsersController {
 
     constructor(private readonly UserService: UserService) { }
-    // @Get()
-    // getHello(): string {
-    //     console.log('recuperer la liste des todo');
-    //     return 'liste todo';
-    // }
+
     @Post()
     async createUser(@Body() create: UsersEntity) {
         console.log('new user', create);
@@ -21,9 +17,9 @@ export class UsersController {
     }
 
     @Patch(':id_users')
-    UpdateUser(@Param('id_users') id_users: string, @Body() updateUserDto: getUser) {
-        console.log('update', updateUserDto, 'id_users', +id_users)
-        return this.UserService.update(+id_users, updateUserDto);
+    UpdateUser(@Param('id_users') id_users: number, @Body() updateUserDto: getUser) {
+        console.log('update', updateUserDto, 'id_users', id_users)
+        return this.UserService.update(id_users, updateUserDto);
     }
     @Delete()
     deleteTodo(): string {
@@ -32,8 +28,8 @@ export class UsersController {
     }
 
     @Get(':id')
-    findOne(@Param('id') id: string) {
-        return this.UserService.findOne(+id);
+    findOne(@Param('id') id: number) {
+        return this.UserService.findOne(id);
     }
 
     @Get()
@@ -42,8 +38,8 @@ export class UsersController {
     }
 
     @Delete(':id')
-    remove(@Param('id') id: string) {
-        return this.UserService.remove(+id);
+    remove(@Param('id') id: number) {
+        return this.UserService.remove(id);
     }
 
 }

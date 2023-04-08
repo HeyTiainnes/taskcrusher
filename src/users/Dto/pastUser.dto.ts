@@ -1,5 +1,5 @@
 export class pastUser {
-    id_users: string;
+    id_users: number;
     name: string;
     mail: string;
     password: string;
