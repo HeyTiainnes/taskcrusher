@@ -1,15 +1,18 @@
-import { Controller, Get, Post, Delete, Put, Patch, Body, Param, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Delete, Put, Patch, Body, Param } from '@nestjs/common';
 import { CreateTasksDTO } from './Dto/createTasks.dto';
 import { TasksEntity } from './tasks.entity/tasks.entity';
 import { TasksService } from './tasks.service';
 import { updateTaskeDto } from './Dto/updateTask.dto'
-import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
 
 @Controller('Tasks')
 export class TasksController {
     constructor(private readonly tasksService: TasksService) { }
-
+    // @Get()
+    // getHello(): string {
+    //     console.log('recuperer la liste des todo');
+    //     return 'liste todo';
+    // }
     @Post()
     async createTask(@Body() create: TasksEntity) {
         console.log('new tsk', create);
@@ -36,9 +39,8 @@ export class TasksController {
     }
 
     @Get()
-    // @UseGuards(JwtAuthGuard)
-    async findAll() {
-        return await this.tasksService.findAll();
+    findAll() {
+        return this.tasksService.findAll();
     }
 
     @Delete(':id')
@@ -46,11 +48,4 @@ export class TasksController {
         return this.tasksService.remove(+id);
     }
 }
-
-
-
-
-
-
-
 
