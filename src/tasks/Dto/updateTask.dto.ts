@@ -7,5 +7,4 @@ export class updateTaskeDto {
     date_debut_prevue: Date;
     etat: boolean;
     notes: string;
-
 }
