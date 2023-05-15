@@ -3,5 +3,5 @@ export class pastUser {
     name: string;
     mail: string;
     password: string;
-
+    ///
 }
