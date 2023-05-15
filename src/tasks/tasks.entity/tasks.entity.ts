@@ -32,6 +32,10 @@ export class TasksEntity {
     @Column({ nullable: true })
     notes?: string;
 
+    @Column({ nullable: true })
+    userId: number;
+
+
     @OneToMany(type => checkListItemsEntity, (checkListItems) => checkListItems.Tasks)
     checkListItems: checkListItemsEntity[];
 

@@ -3,7 +3,7 @@ import { IsEmail } from "class-validator/types/decorator/decorators";
 
 export class createUser {
 
-    id_users: string;
+    userId: string;
 
     @IsNotEmpty({
 

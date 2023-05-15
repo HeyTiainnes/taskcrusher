@@ -20,10 +20,10 @@ export class UsersController {
         return await this.UserService.createUser(create);
     }
 
-    @Patch(':id_users')
-    UpdateUser(@Param('id_users') id_users: string, @Body() updateUserDto: getUser) {
-        console.log('update', updateUserDto, 'id_users', +id_users)
-        return this.UserService.update(+id_users, updateUserDto);
+    @Patch(':userId')
+    UpdateUser(@Param('userId') userId: string, @Body() updateUserDto: getUser) {
+        console.log('update', updateUserDto, 'userId', +userId)
+        return this.UserService.update(+userId, updateUserDto);
     }
     @Delete()
     deleteTodo(): string {

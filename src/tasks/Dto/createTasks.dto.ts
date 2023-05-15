@@ -9,6 +9,7 @@ export class CreateTasksDTO {
     //date_debut_prevue: Date;
     //etat: boolean;
     notes: string;
+    userId: number;
 
 }
 

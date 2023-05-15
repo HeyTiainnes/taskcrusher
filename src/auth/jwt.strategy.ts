@@ -13,18 +13,27 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
         private userRepository: Repository<UsersEntity>,
     ) {
         super({
-            secretOrKey: 'krakoukass',
+            constructor(configService: ConfigService) {
+                secretOrKey: configService.get<string>("SECRET_KEY")
+            },
             jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+            ignoreExpiration: false,
         });
     }
 
     // IMPORTANT IL FAUT GARDER CE NOM DE METHODE
-    async validate(payload: any): Promise<UsersEntity> {
+    async validate(payload: any) {
         console.log('validate');
         const { name } = payload;
-        const user: UsersEntity = await this.userRepository.findOneBy({ name });
+        const user = await this.userRepository.findOneBy({ name });
+        if (user) {
+            const { password, ...result } = user;
+            return result;
+        } else {
 
-        if (!user) throw new UnauthorizedException();
-        return user;
+
+            throw new UnauthorizedException();
+            return user;
+        }
     }
 }

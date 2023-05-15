@@ -6,7 +6,7 @@ import { Column, Entity, PrimaryGeneratedColumn, ManyToOne } from "typeorm";
 @Entity('theyUsers')
 export class UsersEntity {
     @PrimaryGeneratedColumn()
-    id_users: number
+    userId: number
 
     @Column()
     name: string;
@@ -16,6 +16,9 @@ export class UsersEntity {
 
     @Column()
     password: string;
+
+    // @Column()
+    // userId : number;
 
     @ManyToOne(type => TasksEntity, (Tasks) => Tasks.user)
     Tasks: TasksEntity[];
