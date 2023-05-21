@@ -19,6 +19,12 @@ export class UsersEntity {
 
     @Column()
     password: string;
+    @Column({
+        type: 'enum',
+        enum: RoleEnumType,
+        default: RoleEnumType.USER,
+    })
+    role: RoleEnumType;
 
     // @ManyToOne(type => TasksEntity, (Tasks) => Tasks.user)
     // Tasks: TasksEntity[];

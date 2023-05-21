@@ -1,7 +1,7 @@
 // Importe les classes nécessaires depuis les packages '@nestjs/common' et '@nestjs/typeorm'
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-
+import { AuthModule } from 'src/auth/auth.module';
 // Importe les classes TasksController, TasksService et TasksEntity depuis leurs fichiers respectifs
 import { TasksController } from './tasks.controller';
 import { TasksService } from './tasks.service';
@@ -11,7 +11,7 @@ import { TasksEntity } from './tasks.entity/tasks.entity';
 @Module({
   // La propriété 'imports' permet d'importer d'autres modules et de les rendre disponibles
   // ici, on importe le module TypeOrmModule en précisant que le modèle à utiliser est TasksEntity
-  imports: [TypeOrmModule.forFeature([TasksEntity])],
+  imports: [TypeOrmModule.forFeature([TasksEntity]), AuthModule],
 
   // La propriété 'controllers' indique les contrôleurs qui seront utilisés dans ce module
   // ici, on utilise le TasksController

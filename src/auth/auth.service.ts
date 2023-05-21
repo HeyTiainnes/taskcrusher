@@ -17,9 +17,8 @@ export class AuthService {
     private jwtService: JwtService,
   ) { }
 
-
   async register(createAuthDto: CreateAuthDto) {
-    const { name, mail, password } = createAuthDto;
+    const { mail, password, name, role } = createAuthDto;
 
     // hashing password
     const salt = await bcrypt.genSalt();
@@ -27,11 +26,12 @@ export class AuthService {
 
     // creation d'une entity user
     const user = this.userRepository.create({
-      name,
       mail,
+      name,
       password: hashedPassword,
+      role
 
-    })
+    });
 
     try {
       // Enregistrement de l'entite user
@@ -51,11 +51,11 @@ export class AuthService {
     }
   }
   async login(loginDto: LoginDto) {
-    const { name, password } = loginDto;
-    const user = await this.userRepository.findOneBy({ name });
-
+    const { mail, password } = loginDto;
+    const user = await this.userRepository.findOneBy({ mail });
+    //
     if (user && (await bcrypt.compare(password, user.password))) {
-      const payload = { name };
+      const payload = { mail };
       const accesToken = await this.jwtService.sign(payload);
 
       return { accesToken };
@@ -66,6 +66,16 @@ export class AuthService {
     }
 
   }
+  findAll() {
+    return `This action returns all auth`;
+  }
 
+  findOne(id: number) {
+    return `This action returns a #${id} auth`;
+  }
+
+  remove(id: number) {
+    return `This action removes a #${id} auth`;
+  }
 }
 
