@@ -1,7 +1,10 @@
 import { TasksEntity } from "src/tasks/tasks.entity/tasks.entity";
 import { Column, Entity, PrimaryGeneratedColumn, ManyToOne, OneToMany } from "typeorm";
 
-
+export enum RoleEnumType {
+    USER = 'user',
+    ADMIN = 'admin',
+}
 
 @Entity('theyUsers')
 export class UsersEntity {
