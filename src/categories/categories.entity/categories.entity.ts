@@ -15,6 +15,6 @@ export class CategoriesEntity {
     @Column()
     couleur: string;
 
-    @ManyToOne(type => TasksEntity, (Tasks) => Tasks.categories)
-    Tasks: TasksEntity[];
+    // @ManyToOne(type => TasksEntity, (Tasks) => Tasks.categories)
+    // Tasks: TasksEntity[];
 }

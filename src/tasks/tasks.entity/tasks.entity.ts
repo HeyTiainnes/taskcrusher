@@ -3,7 +3,7 @@ import { CategoriesEntity } from "src/categories/categories.entity/categories.en
 import { checkListItemsEntity } from "src/check-list-items/check-list-items.entity/check-list-items.entity";
 import { UsersEntity } from "src/users/Dto/users.entity/users.entity";
 
-import { Column, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 
 
 @Entity('Tasks')
@@ -12,16 +12,16 @@ export class TasksEntity {
 
 
     @PrimaryGeneratedColumn()
-    id: number;
+    id?: number;
 
-    @Column()
+    @Column({ nullable: true })
     designation?: string;
 
     @Column({ nullable: true })
     importance?: number;
 
 
-    @Column()
+    @Column({ nullable: true })
     dead_line?: Date;
 
 
@@ -41,15 +41,14 @@ export class TasksEntity {
     notes?: string;
 
 
-    @OneToMany(type => checkListItemsEntity, (checkListItems) => checkListItems.Tasks)
-    checkListItems: checkListItemsEntity[];
+    // @OneToMany(type => checkListItemsEntity, (checkListItems) => checkListItems.Tasks)
+    // checkListItems: checkListItemsEntity[];
 
 
-    @OneToOne(type => CategoriesEntity, (categorie) => categorie.Tasks)
-    categories: CategoriesEntity[];
+    // @OneToOne(type => CategoriesEntity, (categorie) => categorie.Tasks)
+    // categories: CategoriesEntity[];
 
-
-    @OneToOne(type => UsersEntity, (users) => users.tasks)
+    @ManyToOne(type => UsersEntity, (users) => users.tasks)
     @JoinColumn()
     user: UsersEntity;
 }

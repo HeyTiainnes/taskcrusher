@@ -3,6 +3,8 @@ import { CreateTasksDTO } from './Dto/createTasks.dto';
 import { TasksEntity } from './tasks.entity/tasks.entity';
 import { TasksService } from './tasks.service';
 import { updateTaskeDto } from './Dto/updateTask.dto'
+import { GetUser } from 'src/auth/get-user.decorator';
+import { UsersEntity } from 'src/users/Dto/users.entity/users.entity';
 
 
 @Controller('Tasks')
@@ -10,9 +12,13 @@ export class TasksController {
     constructor(private readonly tasksService: TasksService) { }
 
     @Post()
-    async createTask(@Body() create: TasksEntity) {
+    async createTask(
+        @Body()
+        create: CreateTasksDTO,
+        @GetUser() connectedUser: UsersEntity,
+    ) {
         console.log('new tsk', create);
-        return await this.tasksService.createTask(create);
+        return await this.tasksService.createTask(create, connectedUser);
     }
 
     @Patch(':id')

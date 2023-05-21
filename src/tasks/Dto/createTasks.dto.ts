@@ -1,3 +1,4 @@
+import { UsersEntity } from "src/users/Dto/users.entity/users.entity";
 
 
 export class CreateTasksDTO {
@@ -10,5 +11,6 @@ export class CreateTasksDTO {
     //etat: boolean;
     notes: string;
 
+    user: UsersEntity;
 }
 

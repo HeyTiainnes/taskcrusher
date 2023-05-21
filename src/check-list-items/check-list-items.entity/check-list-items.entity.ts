@@ -17,8 +17,8 @@ export class checkListItemsEntity {
     notes: string;
 
 
-    @ManyToOne(type => TasksEntity, (tasks) => tasks.checkListItems)
-    Tasks: TasksEntity[];
+    // @ManyToOne(type => TasksEntity, (tasks) => tasks.checkListItems)
+    // Tasks: TasksEntity[];
 
 }
 
