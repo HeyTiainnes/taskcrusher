@@ -52,13 +52,13 @@ export class AuthService {
   }
   async login(loginDto: LoginDto) {
     const { mail, password } = loginDto;
-    const user = await this.userRepository.findOneBy({ mail });
+    const user = await this.userRepository.findOne({ where: { mail } });
     //
     if (user && (await bcrypt.compare(password, user.password))) {
       const payload = { mail };
-      const accesToken = await this.jwtService.sign(payload);
+      const accessToken = await this.jwtService.sign(payload);
 
-      return { accesToken };
+      return { accessToken };
     } else {
       throw new UnauthorizedException(
         'Ces identifiants ne sont pas bon...',
