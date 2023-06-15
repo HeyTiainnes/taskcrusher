@@ -13,17 +13,58 @@ export class TasksService {
         private readonly tasksRepository: Repository<TasksEntity>,
     ) { }
 
-    async createTask(
-        createTaskDto: CreateTasksDTO,
-        connectedUser: UsersEntity
+    // async createTask(
+    //     createTaskDto: CreateTasksDTO,
+    //     connectedUser: UsersEntity
 
-    ): Promise<TasksEntity> {
-        const TaskCreation = {
-            ...createTaskDto,
-            user: connectedUser
-        };
-        return await this.tasksRepository.save(TaskCreation);
+    // ): Promise<TasksEntity> {
+    //     const TaskCreation = {
+    //         ...createTaskDto,
+    //         user: connectedUser
+    //     };
+    //     return await this.tasksRepository.save(TaskCreation);
+    // }
+
+    /////////////////////CREATE/////////////////////////////////////
+
+    async create(
+        createTacheDto: CreateTasksDTO,
+        utilisateur: UsersEntity,
+    ): Promise<TasksEntity | string> {
+        const { designation } = createTacheDto;
+        const query = this.tasksRepository.createQueryBuilder();
+        query.where({ designation }).andWhere({ user: utilisateur });
+        const existAlready = await query.getOne();
+
+        if (existAlready !== null) {
+            return `Vous avez déja crée la Tâche avec le titre:${designation} ${utilisateur}`;
+        }
+
+        const newTache = await this.tasksRepository.create({
+            ...createTacheDto,
+            user: utilisateur,
+        });
+        try {
+            if (createTacheDto.designation) { createTacheDto.designation = newTache.designation }
+
+            // if (createTacheDto.date_event) { createTacheDto.date_event = newTache.date_event }
+            // console.log(' create tache dto date', createTacheDto.date_event)
+            // if (createTacheDto.body) { createTacheDto.body = newTache.body }
+            // if (createTacheDto.image) { createTacheDto.image = newTache.image }
+            // if (createTacheDto.url) { createTacheDto.url = newTache.url }
+            // if (createTacheDto.categorie_) {
+            //     createTacheDto.categorie_ = newTache.categorie_
+            // }
+
+
+            return await this.tasksRepository.save(newTache);
+        }
+        catch (e) {
+            throw new Error(e);
+        }
     }
+
+    /////////////////////CREATE/////////////////////////////////
     async findOne(id: number): Promise<TasksEntity> {
         const taskFound = await this.tasksRepository.findOneBy({
             id: id,
@@ -35,6 +76,18 @@ export class TasksService {
         }
         return taskFound;
     }
+
+    async findAllTaskByUser(utilisateur: UsersEntity): Promise<TasksEntity[]> {
+        const taskFound = await this.tasksRepository.findBy({
+            user: utilisateur,
+        });
+        if (!taskFound) {
+            throw new NotFoundException(`Tâche non trouvée`);
+        }
+        console.log(taskFound);
+        return taskFound;
+    }
+
     async update(id: number, updatTaskeDto: updateTaskeDto) {
         // 1/ recuperer la task a modifier dans la constante suivante. on parcours les task via find pour trouver task ac l'id recherché
         const taskUpdate = await this.findOne(id);

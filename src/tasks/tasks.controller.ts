@@ -12,16 +12,25 @@ import { AuthGuard } from '@nestjs/passport';
 export class TasksController {
     constructor(private readonly tasksService: TasksService) { }
 
+    // @Post()
+    // async createTask(
+    //     @Body()
+    //     create: CreateTasksDTO,
+    //     @GetUser() connectedUser: UsersEntity,
+    // ) {
+    //     console.log('new tsk', create);
+    //     return await this.tasksService.createTask(create, connectedUser);
+    // }
+    /////////////////////////////////////CREATE//////////////////////////
     @Post()
-    async createTask(
-        @Body()
-        create: CreateTasksDTO,
-        @GetUser() connectedUser: UsersEntity,
-    ) {
-        console.log('new tsk', create);
-        return await this.tasksService.createTask(create, connectedUser);
+    create(
+        @Body() createTacheDto: CreateTasksDTO,
+        @GetUser() utilisateur: UsersEntity,
+    ): Promise<TasksEntity | string> {
+        return this.tasksService.create(createTacheDto, utilisateur);
     }
 
+    ////////////////////////////CREATE/////////////////////////////////
     @Patch(':id')
     UpdateTask(@Param('id') id: string, @Body() updateTaskeDto: updateTaskeDto) {
         console.log('update', updateTaskeDto, 'id', +id)
@@ -37,6 +46,13 @@ export class TasksController {
     @Get(':id')
     findOne(@Param('id') id: string) {
         return this.tasksService.findOne(+id);
+    }
+
+    @Get()
+    @Get()
+    findAllTaskByUser(@GetUser() utilisateur: UsersEntity): Promise<TasksEntity[]> {
+        console.log(TasksEntity);
+        return this.tasksService.findAllTaskByUser(utilisateur);
     }
 
     @Get()
