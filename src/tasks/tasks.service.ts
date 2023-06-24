@@ -95,7 +95,7 @@ export class TasksService {
         taskUpdate.importance = updatTaskeDto.importance;
         taskUpdate.dead_line = updatTaskeDto.dead_line;
         taskUpdate.duree_prevue = updatTaskeDto.duree_prevue;
-        taskUpdate.date_debut_prevue = updatTaskeDto.date_debut_prevue;
+        //taskUpdate.date_debut_prevue = updatTaskeDto.date_debut_prevue;
         taskUpdate.etat = updatTaskeDto.etat;
         taskUpdate.notes = updatTaskeDto.notes;
         return await this.tasksRepository.save(taskUpdate);

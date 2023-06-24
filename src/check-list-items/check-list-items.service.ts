@@ -29,7 +29,7 @@ export class CheckListItemsService {
 
         const CheckListItemsUpdate = await this.findOne(id);
         CheckListItemsUpdate.name = updatCheckListItemsDTO.name;
-        CheckListItemsUpdate.items = updatCheckListItemsDTO.items;
+        // CheckListItemsUpdate.items = updatCheckListItemsDTO.items;
         CheckListItemsUpdate.notes = updatCheckListItemsDTO.notes;
 
         return await this.checkListItemsRepository.save(CheckListItemsUpdate);

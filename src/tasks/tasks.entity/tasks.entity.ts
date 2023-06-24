@@ -30,7 +30,7 @@ export class TasksEntity {
 
 
     @Column({ nullable: true })
-    date_debut_prevue?: Date;
+    start_date?: Date;
 
 
     @Column({ nullable: true })
@@ -41,14 +41,22 @@ export class TasksEntity {
     notes?: string;
 
 
-    // @OneToMany(type => checkListItemsEntity, (checkListItems) => checkListItems.Tasks)
-    // checkListItems: checkListItemsEntity[];
+    @OneToOne(type => checkListItemsEntity, (checkListItems) => checkListItems.task)
+    checkListItems: checkListItemsEntity[];
 
 
     // @OneToOne(type => CategoriesEntity, (categorie) => categorie.Tasks)
     // categories: CategoriesEntity[];
 
-    @ManyToOne(type => UsersEntity, (users) => users.tasks)
+    @ManyToOne(type => UsersEntity, (users) => users.tasks,
+
+        {
+
+            onDelete: 'CASCADE',
+            eager: false
+
+        }
+    )
     @JoinColumn()
     user: UsersEntity;
 }
