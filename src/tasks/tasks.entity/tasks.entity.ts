@@ -41,8 +41,11 @@ export class TasksEntity {
     notes?: string;
 
 
-    @OneToOne(type => checkListItemsEntity, (checkListItems) => checkListItems.task)
-    checkListItems: checkListItemsEntity[];
+    @ManyToOne(() => checkListItemsEntity, (cli) => cli.task, {
+        onDelete: 'CASCADE',
+        eager: true,
+    })
+    CheckListItemsEntity: checkListItemsEntity;
 
 
     // @OneToOne(type => CategoriesEntity, (categorie) => categorie.Tasks)

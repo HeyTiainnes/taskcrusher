@@ -1,5 +1,5 @@
 import { TasksEntity } from "src/tasks/tasks.entity/tasks.entity";
-import { Column, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity('checkListItems')
 
@@ -16,10 +16,15 @@ export class checkListItemsEntity {
     @Column({ nullable: true })
     notes?: string;
 
-
-
-    @OneToOne(() => TasksEntity)
-    @JoinColumn()
+    @ManyToOne(() => TasksEntity, (task) => task.CheckListItemsEntity, {
+        onDelete: 'CASCADE',
+    })
     task: TasksEntity;
-
 }
+
+
+// @OneToOne(() => TasksEntity)
+// @JoinColumn()
+// task: TasksEntity;
+
+// }
