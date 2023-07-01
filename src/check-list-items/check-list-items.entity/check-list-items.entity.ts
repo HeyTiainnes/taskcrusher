@@ -1,17 +1,24 @@
-import { TasksEntity } from "src/tasks/tasks.entity/tasks.entity";
-import { Column, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+// import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { TasksEntity } from 'src/tasks/tasks.entity/tasks.entity';
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+
 @Entity('checkListItems')
-export class checkListItemsEntity {
+export class CheckListItemsEntity {
     @PrimaryGeneratedColumn()
-    id: number
+    id: number;
+
     @Column({ nullable: true })
     name?: string;
+
     @Column({ nullable: true })
     notes?: string;
-    @ManyToOne(() => TasksEntity, (task) => task.CheckListItemsEntity, {
-        onDelete: 'CASCADE',
-        eager: true
-    })
-    task: TasksEntity;
-}
 
+    @OneToMany(() => TasksEntity, (task) => task.CheckListItemsEntity, {
+        onDelete: 'CASCADE',
+    })
+    @JoinColumn({ name: 'taskId' })
+    task: TasksEntity;
+
+    @Column({ nullable: true })
+    taskId: number;
+}

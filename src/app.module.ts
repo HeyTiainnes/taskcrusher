@@ -19,7 +19,6 @@ import { AuthModule } from './auth/auth.module';
 
 dotenv.config();
 
-
 @Module({
   imports: [UsersModule, TasksModule, CategoriesModule, CheckListItemsModule,
     ConfigModule.forRoot({

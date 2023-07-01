@@ -13,19 +13,6 @@ export class TasksService {
         private readonly tasksRepository: Repository<TasksEntity>,
     ) { }
 
-    // async createTask(
-    //     createTaskDto: CreateTasksDTO,
-    //     connectedUser: UsersEntity
-
-    // ): Promise<TasksEntity> {
-    //     const TaskCreation = {
-    //         ...createTaskDto,
-    //         user: connectedUser
-    //     };
-    //     return await this.tasksRepository.save(TaskCreation);
-    // }
-
-    /////////////////////CREATE/////////////////////////////////////
 
     async create(
         createTacheDto: CreateTasksDTO,
@@ -47,15 +34,6 @@ export class TasksService {
         try {
             if (createTacheDto.designation) { createTacheDto.designation = newTache.designation }
 
-            // if (createTacheDto.date_event) { createTacheDto.date_event = newTache.date_event }
-            // console.log(' create tache dto date', createTacheDto.date_event)
-            // if (createTacheDto.body) { createTacheDto.body = newTache.body }
-            // if (createTacheDto.image) { createTacheDto.image = newTache.image }
-            // if (createTacheDto.url) { createTacheDto.url = newTache.url }
-            // if (createTacheDto.categorie_) {
-            //     createTacheDto.categorie_ = newTache.categorie_
-            // }
-
 
             return await this.tasksRepository.save(newTache);
         }
@@ -64,10 +42,11 @@ export class TasksService {
         }
     }
 
-    /////////////////////CREATE/////////////////////////////////
     async findOne(id: number): Promise<TasksEntity> {
-        const taskFound = await this.tasksRepository.findOneBy({
-            id: id,
+        const taskFound = await this.tasksRepository.findOne({
+            where: {
+                id: id,
+            },
         });
         if (!taskFound) {
             throw new NotFoundException(

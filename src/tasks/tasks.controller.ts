@@ -12,16 +12,6 @@ import { AuthGuard } from '@nestjs/passport';
 export class TasksController {
     constructor(private readonly tasksService: TasksService) { }
 
-    // @Post()
-    // async createTask(
-    //     @Body()
-    //     create: CreateTasksDTO,
-    //     @GetUser() connectedUser: UsersEntity,
-    // ) {
-    //     console.log('new tsk', create);
-    //     return await this.tasksService.createTask(create, connectedUser);
-    // }
-    /////////////////////////////////////CREATE//////////////////////////
     @Post()
     create(
         @Body() createTacheDto: CreateTasksDTO,
@@ -30,7 +20,6 @@ export class TasksController {
         return this.tasksService.create(createTacheDto, utilisateur);
     }
 
-    ////////////////////////////CREATE/////////////////////////////////
     @Patch(':id')
     UpdateTask(@Param('id') id: string, @Body() updateTaskeDto: updateTaskeDto) {
         console.log('update', updateTaskeDto, 'id', +id)

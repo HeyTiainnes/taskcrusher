@@ -1,6 +1,6 @@
 
 import { CategoriesEntity } from "src/categories/categories.entity/categories.entity";
-import { checkListItemsEntity } from "src/check-list-items/check-list-items.entity/check-list-items.entity";
+import { CheckListItemsEntity } from "src/check-list-items/check-list-items.entity/check-list-items.entity";
 import { UsersEntity } from "src/users/Dto/users.entity/users.entity";
 import { Column, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 
@@ -22,11 +22,13 @@ export class TasksEntity {
     etat?: boolean;
     @Column({ nullable: true })
     notes?: string;
-    @ManyToOne(() => checkListItemsEntity, (cli) => cli.task, {
+
+    @ManyToOne(() => CheckListItemsEntity, (cli) => cli.task, {
         onDelete: 'CASCADE',
         eager: true,
     })
-    CheckListItemsEntity: checkListItemsEntity[];
+    CheckListItemsEntity: CheckListItemsEntity[];
+
     @ManyToOne(type => UsersEntity, (users) => users.tasks,
         {
             onDelete: 'CASCADE',

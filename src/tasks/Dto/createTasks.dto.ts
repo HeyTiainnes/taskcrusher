@@ -1,3 +1,4 @@
+import { CheckListItemsEntity } from "src/check-list-items/check-list-items.entity/check-list-items.entity";
 import { UsersEntity } from "src/users/Dto/users.entity/users.entity";
 
 
@@ -7,10 +8,9 @@ export class CreateTasksDTO {
     // importance: number;
     dead_line: Date;
     start_date: Date;
-    // duree_prevue: Date;
-    //date_debut_prevue: Date;
-    //etat: boolean;
-    notes: string;
 
+    notes: string;
+    checkListItems: CheckListItemsEntity[];
     user: UsersEntity;
+
 }

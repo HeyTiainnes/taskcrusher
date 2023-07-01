@@ -26,8 +26,7 @@ export class UsersEntity {
     })
     role: RoleEnumType;
 
-    // @ManyToOne(type => TasksEntity, (Tasks) => Tasks.user)
-    // Tasks: TasksEntity[];
+
     @OneToMany(type => TasksEntity, (task) => task.user)
     tasks: TasksEntity[];
 
