@@ -13,7 +13,12 @@ export class CheckListItemsEntity {
     @Column({ nullable: true })
     notes?: string;
 
-    @ManyToOne(type => TasksEntity, (tasks) => tasks.checkListItems)
+    @ManyToOne(type => TasksEntity, (tasks) => tasks.checkListItems,
+        {
+            onDelete: 'CASCADE',
+            eager: false
+        }
+    )
     //checkListItems: checkListItemsEntity[];
     Tasks: TasksEntity[];
 
