@@ -1,10 +1,9 @@
-// import { Injectable, NotFoundException } from '@nestjs/common';
+
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Repository, FindOneOptions } from 'typeorm';
 import { CheckListItemsEntity } from './check-list-items.entity/check-list-items.entity';
 import { CheckListItemsDTO } from './check-list-items.entity/dto/createCheckListItems.dto';
-import { FindOneOptions } from 'typeorm';
-import { Injectable, NotFoundException } from '@nestjs/common';
 
 @Injectable()
 export class CheckListItemsService {
@@ -14,11 +13,11 @@ export class CheckListItemsService {
     ) { }
 
     async createCheckListItems(checkListItems: CheckListItemsDTO) {
-        const { taskId, ...rest } = checkListItems;
+        const { tasksId, ...rest } = checkListItems;
         const checkListItemsEntity = new CheckListItemsEntity();
         checkListItemsEntity.name = rest.name;
         checkListItemsEntity.notes = rest.notes;
-        checkListItemsEntity.taskId = taskId;
+        checkListItemsEntity.tasksId = tasksId;
         return await this.checkListItemsRepository.save(checkListItemsEntity);
     }
 
@@ -26,13 +25,9 @@ export class CheckListItemsService {
         const options: FindOneOptions<CheckListItemsEntity> = {
             where: { id },
         };
-        const checkListItemsFound = await this.checkListItemsRepository.findOne(
-            options,
-        );
+        const checkListItemsFound = await this.checkListItemsRepository.findOne(options);
         if (!checkListItemsFound) {
-            throw new NotFoundException(
-                `Désolé, nous n'avons pas trouvé de check-List avec l'id ${id}`,
-            );
+            throw new NotFoundException(`Désolé, nous n'avons pas trouvé de check-List avec l'id ${id}`);
         }
         return checkListItemsFound;
     }
@@ -43,7 +38,9 @@ export class CheckListItemsService {
         checkListItemsUpdate.notes = updateCheckListItemsDTO.notes;
         return await this.checkListItemsRepository.save(checkListItemsUpdate);
     }
-
+    async findBytasksId(tasksId: number): Promise<CheckListItemsEntity[]> {
+        return await this.checkListItemsRepository.find({ where: { tasksId } });
+    }
     async findAll(): Promise<CheckListItemsEntity[]> {
         return await this.checkListItemsRepository.find();
     }
@@ -51,9 +48,7 @@ export class CheckListItemsService {
     async remove(id: number): Promise<string> {
         const result = await this.checkListItemsRepository.delete({ id });
         if (result.affected === 0) {
-            throw new NotFoundException(
-                `Suppression impossible, car il n'y a pas de cli avec l'id ${id}`,
-            );
+            throw new NotFoundException(`Suppression impossible, car il n'y a pas de cli avec l'id ${id}`);
         }
         return `Bravo: La cli l'id ${id} a bien été supprimée...`;
     }

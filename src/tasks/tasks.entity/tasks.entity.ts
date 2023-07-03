@@ -8,26 +8,30 @@ import { Column, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryGene
 export class TasksEntity {
     @PrimaryGeneratedColumn()
     id?: number;
+
     @Column({ nullable: true })
     designation?: string;
+
     @Column({ nullable: true })
     importance?: number;
+
     @Column({ nullable: true })
     dead_line?: Date;
+
     @Column({ nullable: true })
     duree_prevue?: Date;
+
     @Column({ nullable: true })
     start_date?: Date;
+
     @Column({ nullable: true })
     etat?: boolean;
+
     @Column({ nullable: true })
     notes?: string;
-
-    @ManyToOne(() => CheckListItemsEntity, (cli) => cli.task, {
-        onDelete: 'CASCADE',
-        eager: true,
-    })
-    CheckListItemsEntity: CheckListItemsEntity[];
+    
+    @OneToMany(type => CheckListItemsEntity, (checkListItems) => checkListItems.Tasks)
+    checkListItems: CheckListItemsEntity[];
 
     @ManyToOne(type => UsersEntity, (users) => users.tasks,
         {

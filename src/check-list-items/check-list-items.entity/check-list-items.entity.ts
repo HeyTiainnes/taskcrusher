@@ -13,12 +13,13 @@ export class CheckListItemsEntity {
     @Column({ nullable: true })
     notes?: string;
 
-    @OneToMany(() => TasksEntity, (task) => task.CheckListItemsEntity, {
-        onDelete: 'CASCADE',
-    })
-    @JoinColumn({ name: 'taskId' })
+    @ManyToOne(type => TasksEntity, (tasks) => tasks.checkListItems)
+    //checkListItems: checkListItemsEntity[];
+    Tasks: TasksEntity[];
+
+    @JoinColumn({ name: 'tasksId' })
     task: TasksEntity;
 
     @Column({ nullable: true })
-    taskId: number;
+    tasksId: number;
 }
