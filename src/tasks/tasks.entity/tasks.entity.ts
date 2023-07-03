@@ -29,8 +29,10 @@ export class TasksEntity {
 
     @Column({ nullable: true })
     notes?: string;
-    
-    @OneToMany(type => CheckListItemsEntity, (checkListItems) => checkListItems.Tasks)
+
+    @OneToMany(type => CheckListItemsEntity, (checkListItems) => checkListItems.Tasks,
+
+    )
     checkListItems: CheckListItemsEntity[];
 
     @ManyToOne(type => UsersEntity, (users) => users.tasks,
