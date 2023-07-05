@@ -1,7 +1,7 @@
 export class getUser {
 
 
-    id_users: string;
+    id: number;
     name: string;
     mail: string;
     password: string;

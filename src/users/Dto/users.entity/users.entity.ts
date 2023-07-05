@@ -1,5 +1,40 @@
-import { TasksEntity } from "src/tasks/tasks.entity/tasks.entity";
+// import { TasksEntity } from "src/tasks/tasks.entity/tasks.entity";
+// import { Column, Entity, PrimaryGeneratedColumn, ManyToOne, OneToMany } from "typeorm";
+
+// export enum RoleEnumType {
+//     USER = 'user',
+//     ADMIN = 'admin',
+// }
+
+// @Entity('theyUsers')
+// export class UsersEntity {
+//     @PrimaryGeneratedColumn()
+//     id_users: number
+
+//     @Column()
+//     name: string;
+
+//     @Column()
+//     mail: string;
+
+//     @Column()
+//     password: string;
+//     @Column({
+//         type: 'enum',
+//         enum: RoleEnumType,
+//         default: RoleEnumType.USER,
+//     })
+//     role: RoleEnumType;
+
+
+//     @OneToMany(type => TasksEntity, (task) => task.user)
+//     tasks: TasksEntity[];
+
+// }
+
+
 import { Column, Entity, PrimaryGeneratedColumn, ManyToOne, OneToMany } from "typeorm";
+import { TasksEntity } from "src/tasks/tasks.entity/tasks.entity";
 
 export enum RoleEnumType {
     USER = 'user',
@@ -9,7 +44,7 @@ export enum RoleEnumType {
 @Entity('theyUsers')
 export class UsersEntity {
     @PrimaryGeneratedColumn()
-    id_users: number
+    id_users: number;
 
     @Column()
     name: string;
@@ -19,6 +54,7 @@ export class UsersEntity {
 
     @Column()
     password: string;
+
     @Column({
         type: 'enum',
         enum: RoleEnumType,
@@ -26,12 +62,8 @@ export class UsersEntity {
     })
     role: RoleEnumType;
 
-
     @OneToMany(type => TasksEntity, (task) => task.user)
     tasks: TasksEntity[];
-
 }
-
-
 
 

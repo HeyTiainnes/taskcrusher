@@ -4,7 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 
 // Importation des composants du module
 import { UsersController } from './users.controller';
-import { UserService } from './users.service';
+import { UsersService } from './users.service';
 import { UsersEntity } from './Dto/users.entity/users.entity';
 
 // Définition du module 'UsersModule'
@@ -16,7 +16,7 @@ import { UsersEntity } from './Dto/users.entity/users.entity';
   controllers: [UsersController],
 
   // Définition du service UserService pour encapsuler la logique métier de l'application liée aux utilisateurs
-  providers: [UserService],
+  providers: [UsersService],
 
 })
 export class UsersModule { }
