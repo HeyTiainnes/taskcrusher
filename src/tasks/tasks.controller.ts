@@ -11,7 +11,6 @@ export class TasksController {
     @UseGuards(JwtAuthGuard)
     @Post()
     create(@Body() createTaskDto: CreateTasksDTO, @Req() req) {
-        // Récupérer l'ID de l'utilisateur connecté depuis le JWT
         const userId = req.user.id_users;
         return this.tasksService.create({ ...createTaskDto, user: { id_users: userId } });
     }
@@ -19,7 +18,6 @@ export class TasksController {
     @UseGuards(JwtAuthGuard)
     @Get()
     findAll(@Req() req) {
-        // Récupérer l'ID de l'utilisateur connecté depuis le JWT
         const userId = req.user.id_users;
         return this.tasksService.findAll(userId);
     }
@@ -27,7 +25,6 @@ export class TasksController {
     @UseGuards(JwtAuthGuard)
     @Get(':id')
     findOne(@Param('id') id: number, @Req() req) {
-        // Récupérer l'ID de l'utilisateur connecté depuis le JWT
         const userId = req.user.id_users;
         return this.tasksService.findOne(id, userId);
     }
@@ -35,7 +32,7 @@ export class TasksController {
     @UseGuards(JwtAuthGuard)
     @Put(':id')
     update(@Param('id') id: number, @Body() updateTaskDto: updateTaskeDto, @Req() req) {
-        // Récupérer l'ID de l'utilisateur connecté depuis le JWT
+
         const userId = req.user.id_users;
         return this.tasksService.update(id, userId, updateTaskDto);
     }
@@ -43,7 +40,7 @@ export class TasksController {
     @UseGuards(JwtAuthGuard)
     @Delete(':id')
     remove(@Param('id') id: number, @Req() req) {
-        // Récupérer l'ID de l'utilisateur connecté depuis le JWT
+
         const userId = req.user.id_users;
         return this.tasksService.remove(id, userId);
     }
