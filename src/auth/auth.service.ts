@@ -34,12 +34,12 @@ export class AuthService {
     });
 
     try {
-      // Enregistrement de l'entite user
+
       const createdUser = await this.userRepository.save(user);
       delete createdUser.password;
       return createdUser;
     } catch (error) {
-      // gestion des erreurs
+
 
       if (error.code === '2305') {
         throw new ConflictException('utilisateur existe deja');

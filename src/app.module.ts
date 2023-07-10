@@ -40,9 +40,9 @@ dotenv.config();
 
 
   ],
-  // controllers: [AppController, CategoriesController],
+
   controllers: [AppController],
   providers: [AppService],
-  //providers: [AppService, CheckListItemsService],
+
 })
 export class AppModule { }

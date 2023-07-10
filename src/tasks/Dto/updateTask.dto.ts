@@ -1,7 +1,7 @@
 import { CheckListItemsEntity } from "src/check-list-items/check-list-items.entity/check-list-items.entity";
 
 export class updateTaskeDto {
-    // id: number;
+
     designation: string;
     importance: number;
     dead_line: Date;

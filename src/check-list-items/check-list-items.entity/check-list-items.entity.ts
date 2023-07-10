@@ -19,7 +19,7 @@ export class CheckListItemsEntity {
             eager: false
         }
     )
-    //checkListItems: checkListItemsEntity[];
+
     Tasks: TasksEntity[];
 
     @JoinColumn({ name: 'tasksId' })
